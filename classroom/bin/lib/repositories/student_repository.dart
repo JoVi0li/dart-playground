@@ -80,7 +80,11 @@ class StudentRepository implements IStudentRepository {
   @override
   void update(double id, StudentModel student) {
     try {
-      
+      StudentModel studentOld = readById(id);
+      if (studentsList.contains(studentOld)) {
+        int studentIndex = studentsList.indexOf(studentOld);
+        studentsList[studentIndex] = student;
+      }
     } catch (e) {
       throw Exception(
         'Não foi possível atualizar o aluno! \nErro: ${e.toString()}',
